@@ -143,7 +143,7 @@ class PDF(FPDF):
         self.chapter_body(text)
 
 # Create a PDF instance
-pdf = PDF()
+pdf = FPDF()
 
 # Clean the final summary to remove any non-latin-1 characters for PDF compatibility
 cleaned_summary = strip_unicode(final_summary)
@@ -163,6 +163,10 @@ file_path = os.path.join(output_dir, "summary.pdf")
 # Save the PDF
 pdf.output(file_path)
 
+from transformers import AutoTokenizer
+
+tokenizer = AutoTokenizer.from_pretrained("your-model-name")
+tokens = tokenizer("Your text here", clean_up_tokenization_spaces=True)
 
 # Save the PDF to a specified file path
 #file_path = "D:\summary"
